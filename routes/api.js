@@ -6,20 +6,9 @@ let Student = db.Student
 let router = express.Router()
 
 router.get('/students', function(req, res, next){
-    Student.findAll({order: ['name']}).then( students => {
+    Student.findAll({order: ['starID']}).then( students => {
         return res.json(students)
-    }).catch(err => next(err) )
-})
-
-
-router.get('/students/:id', function(req, res, next) {
-    Student.findByPk(req.params.id).then(student => {
-        if (student) {
-            res.json(student)
-        } else {
-            res.status(404).send('Student not found')
-        }
-    }).catch( err => next(err) )
+    }).catch(err => next(err))
 })
 
 
@@ -29,7 +18,7 @@ router.post('/students', function(req, res, next){
     }).catch( err => {
         if (err instanceof Sequelize.ValidationError) {
             let messages = err.errors.map( e => e.message )
-            // 400 status = bad request from user 
+            // 400 status = bad request from user
             return res.status(400).json(messages)
         }
         return next(err)
@@ -39,10 +28,7 @@ router.post('/students', function(req, res, next){
 
 router.patch('/students/:id', function(req, res, next){
     Student.update(
-        req.body, {
-            where: {
-                id: req.params.id
-            }
+        req.body, {where: {id: req.params.id}
         }).then( rowsModified => {
         if (!rowsModified[0]) {
             return res.status(404).send('Not found')
@@ -60,7 +46,8 @@ router.patch('/students/:id', function(req, res, next){
 
 
 router.delete('/students/:id', function(req, res, next){
-    Student.destroy({where: {id: req.params.id}}).then( rowsModified => {
+    Student.destroy({where: {id: req.params.id}})
+        .then( rowsModified => {
         return res.send('ok')
     }).catch( err => next(err) )
 })

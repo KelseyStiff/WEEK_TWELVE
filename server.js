@@ -3,15 +3,14 @@ let express = require('express')
 
 //require body parser library
 let bodyParser = require('body-parser')
-let path = require('path')
-
 //require qpi routes
 let api_routes = require('./routes/api.js')
 
+let path = require('path')
 
 //create new web app
 let app = express()
-app.use(express.static(path.join(__dirname, 'student-client', 'dist')))
+app.use(express.static(path.join(__dirname, 'student-sign-in-client', 'dist')))
 
         //tell app to use body parse library
         app.use(bodyParser.json())
@@ -25,7 +24,6 @@ app.use(express.static(path.join(__dirname, 'student-client', 'dist')))
         app.use(function(err,req,res,next){
             console.error(err.stack)
             res.status(500).send('Server error')
-
 })
 
 //create server to run app
