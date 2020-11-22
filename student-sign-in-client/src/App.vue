@@ -35,8 +35,8 @@ export default {
       this.$student_api.addStudent(student).then( student => {
         this.updateStudents()
       }).catch( err => {
-        let message = err.response.data.join(', ')
-        alert('Error adding Student.\n' + message)
+        let msg = err.response.data.join(', ')
+        alert('Error adding Student.\n' + msg)
       })
     },
     studentArrivedOrLeft(student, present){
