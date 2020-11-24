@@ -28,6 +28,6 @@ app.use(express.static(path.join(__dirname, 'student-sign-in-client', 'dist')))
 
 //create server to run app
 //tell server which port to work run on (environmental variable value or port 3000) if
-let server = app.listen(process.env.port || 3000, function (){
+let server = app.listen(process.env.PORT || 3000, function (){
     console.log('Express server running on port', server.address().port )
 })
