@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
     //create tables in database, will overwrite any old database tables (if force is true)
     //returns a promise
-    Student.sync( {force: false} ).then( () => {
+    Student.sync( {force: true} ).then( () => {
         console.log('Synced student table ')
     })
 
